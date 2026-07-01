@@ -23,4 +23,4 @@
 | **선택 수정** | `PUT` | `/api/schedules/{id}` | title, assignee, password | id, title, content, assignee, createdAt, updatedAt |
 | **선택 삭제** | `DELETE` | `/api/schedules/{id}` | password | 일정이 성공적으로 삭제되었습니다. |
 
-* **보안 조치**: 모든 응답 데이터에서 사용자의 **비밀번호(`password`) 필드는 완전히 제외**되어 안전하게 반환됩니다.
+* 모든 응답 데이터에서 사용자의 **비밀번호(`password`) 필드는 완전히 제외** 하고 반환.
