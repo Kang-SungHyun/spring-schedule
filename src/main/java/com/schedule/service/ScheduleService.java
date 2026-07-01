@@ -37,8 +37,10 @@ public class ScheduleService {
     }
 
     // 3. 일정 목록 조회
-    public List<ScheduleResponseDto> getSchedules() {
+    public List<ScheduleResponseDto> getSchedules(String assignee) {
         return scheduleRepository.findAll().stream()
+                .filter(s -> assignee == null || assignee.trim().isEmpty() || s.getAssignee().equals(assignee))
+                .sorted((s1, s2) -> s2.getUpdatedAt().compareTo(s1.getUpdatedAt()))
                 .map(ScheduleResponseDto::new)
                 .collect(Collectors.toList());
     }
@@ -55,7 +57,6 @@ public class ScheduleService {
         }
 
         schedule.setTitle(requestDto.getTitle());
-        schedule.setContent(requestDto.getContent());
         schedule.setAssignee(requestDto.getAssignee());
 
         return new ScheduleResponseDto(schedule);
